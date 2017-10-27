@@ -9,7 +9,7 @@ namespace LinkedList
             Value = value;
         }
 
-        public T Value { get; private set; }
+        public T Value { get; }
         public LinkedListNode<T> Next { get; set; }
     }
 }

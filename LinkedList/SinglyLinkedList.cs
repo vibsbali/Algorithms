@@ -112,27 +112,34 @@ namespace LinkedList
 
         public bool Remove(T item)
         {
+            //This is safe to assume as if the first item is not in head then we are ok to proceed
+            //We are always going to remove from front
             if (Head.Value.Equals(item))
             {
                 RemoveFront();
                 return true;
             }
 
-            if (Tail.Value.Equals(item))
+            //Find if item is in the middle or last
+            var current = Head.Next; 
+            while (current != null) //start at next of Head as head is not the value! previously compared
             {
-                RemoveBack();
-                return true;
-            }
+                if (current.Value.Equals(item))
+                {
+                    //We have found the item so check if it is tail
+                    if (current.Next == null)
+                    {
+                        RemoveBack();
+                        return true;
+                    }
 
-            //Find if item is in the middle
-            var current = Head; 
-            if (current.Next.Value.Equals(item)) //start at next of Head as head is not the value! previously compared
-            {
-                var temp = current.Next.Next; // 3 -> 4 -> 5 -- remove 4 current is 3 and current.next.next is going to be tail
-                current.Next = null;
-                current.Next = temp;
-                --Count;
-                return true;
+                    var temp = current.Next.Next; // 3 -> 4 -> 5 -- remove 4 current is 3 and current.next.next is going to be tail
+                    current.Next = null;
+                    current.Next = temp;
+                    --Count;
+                    return true;
+                }
+                current = current.Next;
             }
 
             return false;
