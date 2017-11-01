@@ -8,8 +8,7 @@ namespace DoublyLinkedList
     {
         private DoubleLinkedListNode<T> Head { get; set; }
         private DoubleLinkedListNode<T> Tail { get; set; }
-
-
+        
         public IEnumerator<T> GetEnumerator()
         {
             var current = Head;
@@ -27,7 +26,7 @@ namespace DoublyLinkedList
 
         public void Add(T item)
         {
-            AddFront(item);
+            AddBack(item);
         }
 
         public void AddFront(T item)
