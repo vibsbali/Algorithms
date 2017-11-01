@@ -67,7 +67,13 @@ namespace Queues
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            var current = Head;
+            while (current.Next != null)
+            {
+                array[arrayIndex] = current.Value;
+                ++arrayIndex;
+                current = current.Next;
+            }
         }
 
         public bool Remove(T item)
@@ -79,11 +85,28 @@ namespace Queues
                 if (current.Value.Equals(item))
                 {
                     //First item could be head
-                    if (current == Head)
+                    if (current.Previous == null)
                     {
                         RemoveFirst();
+                        return true;
                     }
+                    
+                    //Last item could be tail
+                    if (current.Next == null)
+                    {
+                        RemoveLast();
+                        return true;
+                    }
+
+                    //otherwise
+                    var currentsPrevious = current.Previous;
+                    var currentsNext = current.Next;
+                    current = null;
+                    currentsPrevious.Next = currentsNext;
+                    currentsNext.Previous = currentsPrevious;
+                    return true;
                 }
+
                 current = current.Next;
             }
             return false;
@@ -110,6 +133,26 @@ namespace Queues
                 Head = null;
                 Head = temp.Next;
                 Head.Previous = null; //TODO Check if Head.Previous required or is it already null because we set Head to null
+                Count--;
+            }
+        }
+
+        public void RemoveLast()
+        {
+            if (Count == 0)
+            {
+                throw new InvalidOperationException("Cannot call Remove on empty linked list");
+            }
+
+            if (Head == Tail)
+            {
+                Clear();
+            }
+            else
+            {
+                var tailsPrevious = Tail.Previous;
+                Tail = null;
+                Tail = tailsPrevious;
                 Count--;
             }
         }
