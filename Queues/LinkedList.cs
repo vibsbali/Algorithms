@@ -104,6 +104,7 @@ namespace Queues
                     current = null;
                     currentsPrevious.Next = currentsNext;
                     currentsNext.Previous = currentsPrevious;
+                    --Count;
                     return true;
                 }
 
@@ -155,6 +156,36 @@ namespace Queues
                 Tail = tailsPrevious;
                 Count--;
             }
+        }
+
+        public void AddBack(T item)
+        {
+            if (Tail == null)
+            {
+                Add(item);
+                return;
+            }
+
+            var node = new LinkedListNode<T>(item);
+            Tail.Next = node;
+            node.Previous = Tail;
+            Tail = Tail.Next;
+            ++Count;
+        }
+
+        public void AddFront(T item)
+        {
+            if (Head == null)
+            {
+                Add(item);
+                return;
+            }
+
+            var node = new LinkedListNode<T>(item);
+            Head.Previous = node;
+            node.Next = Head;
+            Head = Head.Previous;
+            ++Count;
         }
     }
 }

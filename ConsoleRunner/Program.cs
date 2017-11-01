@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DoublyLinkedList;
+﻿
+
+using System;
 using LinkedList;
+using Queues;
 
 namespace ConsoleRunner
 {
@@ -13,13 +10,11 @@ namespace ConsoleRunner
     {
         static void Main(string[] args)
         {
-            //TestSinglyLinkedList();
+            var myLinkedList = new LinkedList<int>();
 
-            var myLinkedList = new DoubleLinkedList<int>();
-
-            myLinkedList.Add(1);
-            myLinkedList.AddBack(2);
-            myLinkedList.AddBack(3);
+            myLinkedList.AddFront(1);
+            myLinkedList.Add(2);
+            myLinkedList.Add(3);
 
 
             PrintCountAndItems(myLinkedList);
@@ -30,11 +25,12 @@ namespace ConsoleRunner
             // 1 --> 3
 
 
-            myLinkedList.Add(1);
-            myLinkedList.AddBack(2);
-            myLinkedList.AddBack(3);
+            myLinkedList.AddFront(1);
+            myLinkedList.Add(2);
+            myLinkedList.Add(3);
+            PrintCountAndItems(myLinkedList);
             // 1 --> 1 --> 3 --> 2 --> 3
-
+            
 
             myLinkedList.Remove(3);
             // 1 --> 1 --> 2 --> 3
@@ -46,7 +42,7 @@ namespace ConsoleRunner
             PrintCountAndItems(myLinkedList);
         }
 
-        private static void PrintCountAndItems(DoubleLinkedList<int> myLinkedList)
+        private static void PrintCountAndItems(LinkedList<int> myLinkedList)
         {
             Console.WriteLine($"Number of items are {myLinkedList.Count}");
 

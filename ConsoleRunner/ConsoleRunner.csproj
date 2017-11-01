@@ -49,13 +49,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DoublyLinkedList\DoublyLinkedList.csproj">
-      <Project>{E4E635A4-26B9-4AA1-872D-2B2977CBEAE2}</Project>
-      <Name>DoublyLinkedList</Name>
-    </ProjectReference>
     <ProjectReference Include="..\LinkedList\LinkedList.csproj">
-      <Project>{5dd511fc-21dc-4387-b266-387054078aea}</Project>
+      <Project>{5DD511FC-21DC-4387-B266-387054078AEA}</Project>
       <Name>LinkedList</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Queues\Queues.csproj">
+      <Project>{97494eb4-566b-4411-877a-6bc5bd909ef3}</Project>
+      <Name>Queues</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
