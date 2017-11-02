@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Queues
 {
     public class QueueWithLinkedList<T> : IEnumerable<T>
     {
-        private LinkedList<T> backingStore = new LinkedList<T>();
+        private readonly LinkedList<T> backingStore = new LinkedList<T>();
 
         public T Peek()
         {
@@ -28,22 +25,24 @@ namespace Queues
                 throw new InvalidOperationException("Cannot call Peek on empty Queue");
             }
 
-            var itemToReturn = backingStore.Head;
+            var valueToReturn = backingStore.Head.Value;
             backingStore.RemoveFirst();
-            return itemToReturn.Value;
+            return valueToReturn;
         }
 
-        public void Enqueue()
+        public void Enqueue(T item)
         {
-
+            backingStore.Add(item);
         }
 
-
-
+        public int Count => backingStore.Count;
 
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            foreach (var item in backingStore)
+            {
+                yield return item;
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
