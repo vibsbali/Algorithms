@@ -1,6 +1,5 @@
-﻿
-
-using System;
+﻿using System;
+using System.Collections.Generic;
 using LinkedList;
 using Queues;
 
@@ -9,6 +8,53 @@ namespace ConsoleRunner
     class Program
     {
         static void Main(string[] args)
+        {
+            var queue = new QueueWithArrays<int>(2);
+
+            queue.Enqueue(1);
+            queue.Enqueue(2);
+            queue.Enqueue(3);
+
+            //1 -> 2 -> 3
+            PrintCountAndItems(queue);
+
+            var item = queue.Dequeue();
+            Console.WriteLine(item);
+            // 1
+
+            PrintCountAndItems(queue);
+            // 2 -> 3
+
+            queue.Enqueue(4);
+            PrintCountAndItems(queue);
+            // 2 -> 3 -> 4
+
+            var numberOfItems = queue.Count;
+            for (int i = 0; i < numberOfItems; i++)
+            {
+                Console.WriteLine(queue.Dequeue());
+                // 2 -> 3 -> 4
+            }
+
+            try
+            {
+                queue.Dequeue();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
+        private static void PrintCountAndItems<T>(IEnumerable<T> backingStore)
+        {
+            foreach (var item in backingStore)
+            {
+                Console.WriteLine(item);
+            }
+        }
+
+        private static void TestQueueWithLinkedList()
         {
             var queue = new QueueWithLinkedList<int>();
 
@@ -56,7 +102,7 @@ namespace ConsoleRunner
             }
         }
 
-        private static void PrintCountAndItems(LinkedList<int> myLinkedList)
+        private static void PrintCountAndItems(Queues.LinkedList<int> myLinkedList)
         {
             Console.WriteLine($"Number of items are {myLinkedList.Count}");
 
@@ -68,7 +114,7 @@ namespace ConsoleRunner
 
         private static void TestQueueLinkedList()
         {
-            var myLinkedList = new LinkedList<int>();
+            var myLinkedList = new Queues.LinkedList<int>();
 
             myLinkedList.AddFront(1);
             myLinkedList.Add(2);
